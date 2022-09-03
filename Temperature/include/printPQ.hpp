@@ -1,5 +1,5 @@
 #include <iostream>
-#include "include/priorQu.h"
+#include "priorQu.h"
 
 void printPQ(const hys::priorQu<int> &pq) {
     std::cout << "---------------" << "size: " << pq.size() << "---------------\n";

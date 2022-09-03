@@ -4,7 +4,7 @@
 // class 2dTree
 // #include "include/kdTree.h"
 #include "include/priorQu.h"
-#include "printPQ.hpp"
+#include "include/printPQ.hpp"
 
 
 int main(int argc, char const *argv[]) {
