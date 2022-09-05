@@ -6,7 +6,7 @@ namespace hys {
 // priority queue
 template <typename T> class priorQu {
   private:
-    std::vector<T> __data__;
+    std::vector<T> data_;
 
   public:
     priorQu();
@@ -23,10 +23,10 @@ template <typename T> class priorQu {
     T take(int) const;
 };
 
-template <typename T> priorQu<T>::priorQu() { __data__ = *(new std::vector<T>); }
+template <typename T> priorQu<T>::priorQu() { data_ = *(new std::vector<T>); }
 
 template <typename T> priorQu<T>::priorQu(const std::vector<T> &elems) {
-    __data__ = *(new std::vector<T>);
+    data_ = *(new std::vector<T>);
     for (int i = 0; i < elems.size(); i++)
         this->insert(elems[i]);
 }
@@ -35,19 +35,19 @@ template <typename T> int priorQu<T>::parent(int i) { return (i - 1) >> 1; }
 template <typename T> int priorQu<T>::lChild(int i) { return (i << 1) + 1; }
 template <typename T> int priorQu<T>::rChild(int i) { return (i + 1) << 1; }
 
-template <typename T> T priorQu<T>::root() const { return __data__[0]; }
+template <typename T> T priorQu<T>::root() const { return data_[0]; }
 
 template <typename T> T priorQu<T>::pop() {
-    T backup = __data__[0];
-    __data__[0] = __data__.back();
-    __data__.pop_back();
-    if (__data__.empty())
+    T backup = data_[0];
+    data_[0] = data_.back();
+    data_.pop_back();
+    if (data_.empty())
         return backup;
     int i = 0;
-    while (rChild(i) < __data__.size()) {
-        int child = __data__[lChild(i)] < __data__[rChild(i)] ? lChild(i) : rChild(i);
-        if (__data__[i] > __data__[child]) {
-            std::swap(__data__[i], __data__[child]);
+    while (rChild(i) < data_.size()) {
+        int child = data_[lChild(i)] < data_[rChild(i)] ? lChild(i) : rChild(i);
+        if (data_[i] > data_[child]) {
+            std::swap(data_[i], data_[child]);
             i = child;
         } else
             break;
@@ -56,11 +56,11 @@ template <typename T> T priorQu<T>::pop() {
 }
 
 template <typename T> void priorQu<T>::insert(T t) {
-    int i = __data__.size();
-    __data__.push_back(t);
+    int i = data_.size();
+    data_.push_back(t);
     while (true) {
-        if (i && __data__[parent(i)] > __data__[i]) {
-            std::swap(__data__[i], __data__[parent(i)]);
+        if (i && data_[parent(i)] > data_[i]) {
+            std::swap(data_[i], data_[parent(i)]);
             i = parent(i);
         } else
             break;
@@ -68,8 +68,8 @@ template <typename T> void priorQu<T>::insert(T t) {
     return;
 }
 
-template <typename T> int priorQu<T>::size() const { return __data__.size(); }
+template <typename T> int priorQu<T>::size() const { return data_.size(); }
 
-template <typename T> T priorQu<T>::take(int i) const { return __data__.at(i); }
+template <typename T> T priorQu<T>::take(int i) const { return data_.at(i); }
 
 } // namespace hys
