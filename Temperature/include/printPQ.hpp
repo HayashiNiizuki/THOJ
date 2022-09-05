@@ -2,7 +2,7 @@
 #include "priorQu.h"
 
 void printPQ(const hys::priorQu<int> &pq) {
-    std::cout << "---------------" << "size: " << pq.size() << "---------------\n";
+    std::cout << "\n" << "Size: " << pq.size() << "\n\n";
     int line = 0;
     for (int i = 0; i < pq.size(); i++) {
         std::cout << pq.take(i) << ' ';

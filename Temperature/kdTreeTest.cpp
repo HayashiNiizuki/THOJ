@@ -11,11 +11,11 @@ int main(int argc, char const *argv[]) {
     std::cout << "exe start.\n";
     hys::priorQu<int> qu;
     srand((unsigned)time(NULL));
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 100; i++) {
         qu.insert(rand() % 1000);
         printPQ(qu);
     }
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 100; i++) {
         // std::cout << qu.pop() << " ";
         // if (i % 10 == 9)
         //     std::cout << std::endl;

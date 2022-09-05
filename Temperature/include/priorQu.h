@@ -12,13 +12,15 @@ template <typename T> class priorQu {
     priorQu();
     priorQu(const std::vector<T> &);
     int size() const;
-    T take(int) const; // TODO: for test
     static int parent(int);
     static int lChild(int);
     static int rChild(int);
     T root() const;
     T pop();
     void insert(T);
+    // NOTE: for test
+//   private:
+    T take(int) const;
 };
 
 template <typename T> priorQu<T>::priorQu() { __data__ = *(new std::vector<T>); }
@@ -42,7 +44,7 @@ template <typename T> T priorQu<T>::pop() {
     if (__data__.empty())
         return backup;
     int i = 0;
-    while (true) {
+    while (rChild(i) < __data__.size()) {
         int child = __data__[lChild(i)] < __data__[rChild(i)] ? lChild(i) : rChild(i);
         if (__data__[i] > __data__[child]) {
             std::swap(__data__[i], __data__[child]);
@@ -54,10 +56,10 @@ template <typename T> T priorQu<T>::pop() {
 }
 
 template <typename T> void priorQu<T>::insert(T t) {
-    int i = __data__.size() - 1;
+    int i = __data__.size();
     __data__.push_back(t);
     while (true) {
-        if (!i && __data__[parent(i)] > __data__[i]) {
+        if (i && __data__[parent(i)] > __data__[i]) {
             std::swap(__data__[i], __data__[parent(i)]);
             i = parent(i);
         } else
