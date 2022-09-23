@@ -9,18 +9,22 @@ template <typename T> class priorQu {
     std::vector<T> data_;
 
   public:
+    // constructor
     priorQu();
     priorQu(const std::vector<T> &);
-    int size() const;
+    priorQu(const std::vector<T> &, int size);
+
+    // static functions
     static int parent(int);
     static int lChild(int);
     static int rChild(int);
+
+    int size() const;
     T root() const;
     T pop();
     void insert(T);
-    // NOTE: for test
-//   private:
-    T take(int) const;
+
+    T operator[](int i) const;
 };
 
 template <typename T> priorQu<T>::priorQu() { data_ = *(new std::vector<T>); }
@@ -28,6 +32,11 @@ template <typename T> priorQu<T>::priorQu() { data_ = *(new std::vector<T>); }
 template <typename T> priorQu<T>::priorQu(const std::vector<T> &elems) {
     data_ = *(new std::vector<T>);
     for (int i = 0; i < elems.size(); i++)
+        this->insert(elems[i]);
+}
+
+template <typename T> priorQu<T>::priorQu(const std::vector<T> &elems, int size) {
+    for (int i = 0; i < size; i++)
         this->insert(elems[i]);
 }
 
@@ -70,6 +79,6 @@ template <typename T> void priorQu<T>::insert(T t) {
 
 template <typename T> int priorQu<T>::size() const { return data_.size(); }
 
-template <typename T> T priorQu<T>::take(int i) const { return data_.at(i); }
+template <typename T> T priorQu<T>::operator[](int i) const { return data_[i]; }
 
 } // namespace hys
